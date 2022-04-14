@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!--    <settings>-->
+<!--        &lt;!&ndash;        <setting name="logImpl"  value="LOG4J"  />&ndash;&gt;-->
+<!--        &lt;!&ndash; 开启延迟加载 &ndash;&gt;-->
+<!--        <setting name="lazyLoadingEnabled" value="true"/>-->
+<!--        &lt;!&ndash; 将积极加载取消 &ndash;&gt;-->
+<!--        <setting name="aggressiveLazyLoading" value="false"/>-->
+<!--    </settings>-->
+<!--    <typeAliases>-->
+<!--        <package name="com.beitie.bean"></package>-->
+<!--    </typeAliases>-->
+    <!-- 环境配置 -->
+<!--     <environments default="test">-->
+<!--         <environment id="test">-->
+<!--             <transactionManager type="JDBC"/>-->
+<!--             &lt;!&ndash; 数据库连接相关配置 ,这里动态获取config.properties文件中的内容&ndash;&gt;-->
+<!--             <dataSource type="POOLED">-->
+<!--                 <property name="driver" value="${database.driver}" />-->
+<!--                 <property name="url" value="${database.url}" />-->
+<!--                 <property name="username" value="root" />-->
+<!--                 <property name="password" value="bestbnf" />-->
+<!--             </dataSource>-->
+<!--         </environment>-->
+<!--     </environments>-->
+    <!-- mapping文件路径配置 -->
+<!--    <mappers>-->
+<!--        <mapper resource="com/beitie/dao/UserInfoMapper.xml"></mapper>-->
+<!--    </mappers>-->
+
+</configuration>

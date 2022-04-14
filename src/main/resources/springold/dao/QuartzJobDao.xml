@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springold.dao.QuartzJobDao">
+    <resultMap id="jobsResultMap" type="springold.bean.ScheduleJob">
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_group" property="jobGroup"/>
+        <result column="job_status" property="jobStatus"/>
+        <result column="cron_expression" property="cronExpression"/>
+        <result column="bean_class" property="beanClass"/>
+        <result column="execute_method" property="executeMethod"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="job_desc" property="jobDesc"/>
+    </resultMap>
+    <insert id="addJob" parameterType="springold.bean.ScheduleJob">
+        insert into task_detail (
+         job_name,
+         job_group,
+         job_status,
+         cron_expression,
+         bean_class,
+         execute_method,
+         create_time,
+         update_time,
+         job_desc
+         )
+        values (
+        #{jobName},
+        #{jobGroup},
+        #{jobStatus},
+        #{cronExpression},
+        #{beanClass},
+        #{executeMethod},
+        #{createTime},
+        #{updateTime},
+        #{jobDesc}
+        )
+    </insert>
+    <delete id="deleteJob">
+        delete
+        from task_detail
+        where job_id = #{jobId}
+    </delete>
+    <update id="updateJob" >
+        update task_detail
+        <set>
+            <if test="jobName != null">job_name = #{jobName},</if>
+            <if test="jobGroup != null">job_group = #{jobGroup},</if>
+            <if test="jobStatus != null">job_status = #{jobStatus},</if>
+            <if test="cronExpression != null">cron_expression = #{cronExpression},</if>
+            <if test="beanClass != null">bean_class = #{beanClass},</if>
+            <if test="executeMethod != null">execute_method = #{executeMethod},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="jobDesc != null">job_desc = #{jobDesc},</if>
+        </set>
+        where job_id = #{jobId}
+    </update>
+    <select id="jobListPage" resultMap="jobsResultMap" >
+        select job_name,
+               job_group,
+                job_status,
+               cron_expression,
+               bean_class,
+               execute_method,
+               create_time,
+               update_time,
+               job_desc,
+               job_id
+        from task_detail where 1=1
+        <if test="createTime != null">and create_time = #{createTime}</if>
+        <if test="updateTime == null">and update_time = #{updateTime}</if>
+        <if test="beanClass != null">and bean_class = #{beanClass}</if>
+        <if test="executeMethod == null">and execute_method = #{executeMethod}</if>
+        <if test="jobStatus != null">and business_code = #{propertyGroups}</if>
+        <if test="jobName == null">and create_time = #{createTime}</if>
+    </select>
+    <select id="jobsList" resultMap="jobsResultMap" >
+        select job_name,
+               job_group,
+               job_status,
+               cron_expression,
+               bean_class,
+               execute_method,
+               create_time,
+               update_time,
+               job_desc,
+               job_id
+        from task_detail
+    </select>
+    <select id="getScheduleJobById" resultMap="jobsResultMap" >
+        select job_name,
+               job_group,
+               job_status,
+               cron_expression,
+               bean_class,
+               execute_method,
+               create_time,
+               update_time,
+               job_desc,
+               job_id
+        from task_detail
+        where job_id = #{job_id}
+    </select>
+
+</mapper>

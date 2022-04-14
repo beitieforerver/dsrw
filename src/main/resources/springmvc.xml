@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--加载注解类的适配器和映射器-->
+    <mvc:annotation-driven conversion-service="conversionServiceDate" ></mvc:annotation-driven>
+
+    <!-- 添加转换类   -->
+    <bean id="conversionServiceDate" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="springold.convert.DateConvert"></bean>
+            </list>
+        </property>
+    </bean>
+    <!--扫描指定的包包括dao，sevice，handler等等-->
+    <context:component-scan base-package="springold" />
+
+    <!-- 视图解析器 -->
+    <!-- ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+
+        <!-- 前缀：/WEB-INF/jsp/ 后缀：.jsp /WEB-INF/jsp/list.jsp -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 配置bean -->
+  <!--  <bean   id="userhandler1" class="com.beitie.handler.UserInfoHandler"></bean>
+    <bean   id="userhandler2" class="com.beitie.handler.UserInfoHandler2"></bean>-->
+    <!--系统异常总解析器只有一个，需要实现HandlerExceptionResolver-->
+<!--    <bean class="com.beitie.util.resolver.CustomResolver"></bean>-->
+
+</beans>
